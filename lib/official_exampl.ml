@@ -369,3 +369,35 @@ let fpa_example (ctx : context) =
     Solver.add solver [ c5 ];
     if check solver [] != SATISFIABLE then raise (TestFailedException "")
     else Printf.printf "Test passed.\n"
+
+let run_examples () =
+    try
+      if not (Log.open_ "z3.log") then
+        raise (TestFailedException "Log couldn't be opened.")
+      else (
+        Printf.printf "Running Z3 version %s\n" Version.to_string;
+        Printf.printf "Z3 full version string: %s\n" Version.full_version;
+        let cfg = [ ("model", "true"); ("proof", "false") ] in
+        let ctx = mk_context cfg in
+        let is = Symbol.mk_int ctx 42 in
+        let ss = Symbol.mk_string ctx "mySymbol" in
+        let bs = Boolean.mk_sort ctx in
+        let ints = Integer.mk_sort ctx in
+        let rs = Real.mk_sort ctx in
+        let v = Arithmetic.Integer.mk_numeral_i ctx 8000000000 in
+        Printf.printf "int symbol: %s\n" (Symbol.to_string is);
+        Printf.printf "string symbol: %s\n" (Symbol.to_string ss);
+        Printf.printf "bool sort: %s\n" (Sort.to_string bs);
+        Printf.printf "int sort: %s\n" (Sort.to_string ints);
+        Printf.printf "real sort: %s\n" (Sort.to_string rs);
+        Printf.printf "integer: %s\n" (Expr.to_string v);
+        basic_tests ctx;
+        quantifier_example1 ctx;
+        fpa_example ctx;
+        Printf.printf "Disposing...\n";
+        Gc.full_major () );
+      Printf.printf "Exiting.\n";
+      exit 0
+    with Error msg ->
+      Printf.printf "Z3 EXCEPTION: %s\n" msg;
+      exit 1

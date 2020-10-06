@@ -6,4 +6,5 @@
 (executable
  (public_name z3_examples)
  (name main)
- (libraries batteries kinematic_equation z3 official_exampl))
+ (libraries batteries puzzles bit_tricks kinematic_equation z3
+   official_exampl))

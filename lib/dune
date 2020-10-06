@@ -9,6 +9,16 @@
  (libraries batteries z3))
 
 (library
+ (name bit_tricks)
+ (modules bit_tricks)
+ (libraries batteries z3))
+
+(library
+ (name puzzles)
+ (modules puzzles)
+ (libraries batteries z3))
+
+(library
  (name official_exampl)
  (modules official_exampl)
  (libraries z3))
