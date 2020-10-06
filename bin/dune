@@ -1,0 +1,9 @@
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))
+
+(executable
+ (public_name z3_examples)
+ (name main)
+ (libraries batteries kinematic_equation z3 official_exampl))

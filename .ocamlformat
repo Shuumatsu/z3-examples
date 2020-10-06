@@ -1,0 +1,4 @@
+extension-indent = 4
+function-indent = 4
+let-binding-indent = 4
+type-decl-indent = 4

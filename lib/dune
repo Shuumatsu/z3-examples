@@ -1,0 +1,14 @@
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))
+
+(library
+ (name kinematic_equation)
+ (modules kinematic_equation)
+ (libraries batteries z3))
+
+(library
+ (name official_exampl)
+ (modules official_exampl)
+ (libraries z3))
