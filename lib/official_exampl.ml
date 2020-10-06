@@ -270,20 +270,24 @@ let quantifier_example1 (ctx : context) =
           (Some (Symbol.mk_string ctx "skid1"))
     in
     Printf.printf "Quantifier X: %s\n" (Quantifier.to_string x);
+    (* mk_forall_const: create a universal quantifier using a list of constants that will form the set of bound variables. *)
     let y =
         Quantifier.mk_forall_const ctx xs body_const (Some 1) [] []
           (Some (Symbol.mk_string ctx "Q2"))
           (Some (Symbol.mk_string ctx "skid2"))
     in
     Printf.printf "Quantifier Y: %s\n" (Quantifier.to_string y);
+    Printf.printf "Expr of quantifier X: %s\n"
+      (Expr.to_string (Quantifier.expr_of_quantifier x));
     if is_true (Quantifier.expr_of_quantifier x) then
-      raise (TestFailedException "") (* unreachable *)
-    else if is_false (Quantifier.expr_of_quantifier x) then
-      raise (TestFailedException "") (* unreachable *)
-    else if is_const (Quantifier.expr_of_quantifier x) then
+      (* unreachable *)
       raise (TestFailedException "")
-
-(* unreachable *)
+    else if is_false (Quantifier.expr_of_quantifier x) then
+      (* unreachable *)
+      raise (TestFailedException "")
+    else if is_const (Quantifier.expr_of_quantifier x) then
+      (* unreachable *)
+      raise (TestFailedException "")
 
 open Z3.FloatingPoint
 
